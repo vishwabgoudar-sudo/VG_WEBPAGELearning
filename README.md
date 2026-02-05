@@ -91,3 +91,32 @@ npm start
 - Copy-to-clipboard code blocks for all major syntax and framework examples.
 - Diagram visualizations for API lifecycle, JWT flow, Angular flow, Node request pipeline, and CORS behavior.
 - Enterprise-friendly architecture with reusable Angular shared components and strongly typed backend models.
+
+## Testing and Coverage Quality Gates
+
+### Backend
+
+```bash
+cd backend
+npm run test
+npm run test:coverage
+```
+
+- Unit and integration tests use Mocha, Chai, and Supertest.
+- Coverage is enforced with NYC at **99% minimum** across statements, branches, functions, and lines.
+
+### Frontend
+
+```bash
+cd frontend
+npm run test
+npm run test:coverage
+```
+
+- Angular unit/component/service tests run with Karma + Jasmine in headless Chrome.
+- Coverage is enforced at **95% minimum** globally.
+
+### CI Automation
+
+- `.github/workflows/ci.yml` runs backend and frontend tests and enforces coverage thresholds.
+- `.github/workflows/pr-summary.yml` runs a free PR summary bot that comments categorized change summaries on pull requests.
