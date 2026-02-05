@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 250">
+  <rect width="920" height="250" fill="#020617" rx="16"/>
+  <text x="20" y="35" fill="#e2e8f0" font-size="18" font-family="Inter">JWT Authentication Flow</text>
+  <g fill="#0f172a" stroke="#22d3ee" stroke-width="2">
+    <rect x="30" y="80" width="180" height="65" rx="10"/><rect x="260" y="80" width="180" height="65" rx="10"/>
+    <rect x="490" y="80" width="180" height="65" rx="10"/><rect x="720" y="80" width="170" height="65" rx="10"/>
+    <rect x="370" y="170" width="180" height="50" rx="10"/>
+  </g>
+  <g fill="#bae6fd" font-size="13" font-family="Inter"><text x="50" y="118">User Login Request</text><text x="285" y="118">Validate Credentials</text><text x="516" y="118">Issue JWT Token</text><text x="734" y="118">Protected Route</text><text x="395" y="200">Verify JWT Middleware</text></g>
+  <g stroke="#a78bfa" stroke-width="3" fill="none"><path d="M210 113 H260 M440 113 H490 M670 113 H720 M805 145 V170 H550"/></g>
+</svg>

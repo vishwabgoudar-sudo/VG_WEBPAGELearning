@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 260">
+  <rect width="920" height="260" fill="#020617" rx="16"/>
+  <text x="20" y="35" fill="#e2e8f0" font-size="18" font-family="Inter">Node.js Request Processing</text>
+  <g fill="#0f172a" stroke="#22d3ee" stroke-width="2">
+    <rect x="20" y="90" width="130" height="65" rx="10"/><rect x="170" y="90" width="130" height="65" rx="10"/><rect x="320" y="90" width="130" height="65" rx="10"/>
+    <rect x="470" y="90" width="130" height="65" rx="10"/><rect x="620" y="90" width="130" height="65" rx="10"/><rect x="770" y="90" width="130" height="65" rx="10"/>
+    <rect x="360" y="185" width="200" height="50" rx="10"/>
+  </g>
+  <g fill="#bae6fd" font-size="12.5" font-family="Inter"><text x="40" y="127">Request</text><text x="184" y="127">Logger</text><text x="337" y="127">Auth</text><text x="482" y="127">Validation</text><text x="653" y="127">Controller</text><text x="808" y="127">Response</text><text x="389" y="215">Error Middleware</text></g>
+  <g stroke="#a78bfa" stroke-width="3" fill="none"><path d="M150 122 H170 M300 122 H320 M450 122 H470 M600 122 H620 M750 122 H770 M835 155 V185 H560"/></g>
+</svg>
