@@ -9,7 +9,7 @@
     "build": "tsc -p tsconfig.json",
     "start": "node dist/server.js",
     "typecheck": "tsc --noEmit",
-    "test": "mocha --require ts-node/register/transpile-only --require source-map-support/register --extension ts \"test/**/*.test.ts\"",
+    "test": "TS_NODE_PROJECT=tsconfig.test.json mocha --require ts-node/register/transpile-only --require source-map-support/register --extension ts \"test/**/*.test.ts\"",
     "test:coverage": "nyc npm run test"
   },
   "dependencies": {

@@ -85,7 +85,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "include": [
+              "src/**/*.spec.ts",
+              "test/**/*.test.ts"
+            ]
           }
         }
       }

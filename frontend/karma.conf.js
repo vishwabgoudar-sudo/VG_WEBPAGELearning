@@ -32,6 +32,6 @@ module.exports = function (config) {
     reporters: ['progress', 'kjhtml', 'coverage'],
     browsers: ['ChromeHeadless'],
     restartOnFileChange: true,
-    singleRun: false
+    singleRun: true
   });
 };
