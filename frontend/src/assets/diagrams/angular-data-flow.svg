@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 240">
+  <rect width="920" height="240" fill="#020617" rx="16"/>
+  <text x="20" y="35" fill="#e2e8f0" font-size="18" font-family="Inter">Angular Data Flow</text>
+  <g fill="#0f172a" stroke="#22d3ee" stroke-width="2">
+    <rect x="25" y="90" width="170" height="70" rx="10"/><rect x="225" y="90" width="170" height="70" rx="10"/>
+    <rect x="425" y="90" width="170" height="70" rx="10"/><rect x="625" y="90" width="130" height="70" rx="10"/><rect x="785" y="90" width="110" height="70" rx="10"/>
+  </g>
+  <g fill="#bae6fd" font-size="13" font-family="Inter"><text x="42" y="130">Component UI</text><text x="250" y="130">Learning Service</text><text x="458" y="130">HttpClient</text><text x="650" y="130">API</text><text x="812" y="130">State</text></g>
+  <g stroke="#a78bfa" stroke-width="3"><line x1="195" y1="125" x2="225" y2="125"/><line x1="395" y1="125" x2="425" y2="125"/><line x1="595" y1="125" x2="625" y2="125"/><line x1="755" y1="125" x2="785" y2="125"/></g>
+</svg>

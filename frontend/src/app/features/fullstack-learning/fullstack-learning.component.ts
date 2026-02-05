@@ -1,30 +1,30 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import { LearningService } from './learning.service';
-import { LearningSection } from './learning.model';
+import { LearningLevel, LearningSection, LearningSectionGroup } from './learning.model';
+import { MotionSectionWrapperComponent } from '../../shared/components/motion-section-wrapper/motion-section-wrapper.component';
+import { LearningCardComponent } from '../../shared/components/learning-card/learning-card.component';
 
 @Component({
   selector: 'app-fullstack-learning',
   standalone: true,
-  imports: [NgFor, NgIf, AsyncPipe],
+  imports: [NgIf, NgFor, AsyncPipe, MotionSectionWrapperComponent, LearningCardComponent],
   template: `
-    <section class="page-header">
-      <h1>Full Stack Development Learning Path</h1>
-      <p>
-        Structured from beginner to advanced topics with practical enterprise guidance,
-        backend-flow narratives, and modern architecture best practices.
-      </p>
-    </section>
+    <app-motion-section-wrapper>
+      <section class="page-header">
+        <h1>Full Stack Development: Motion Learning Experience</h1>
+        <p>
+          Beginner-to-enterprise learning pathways with interactive tabs, animated content blocks,
+          architecture diagrams, and practical coding workflows.
+        </p>
+      </section>
+    </app-motion-section-wrapper>
 
     <section class="status" *ngIf="errorMessage">{{ errorMessage }}</section>
 
-    <section class="card-grid" *ngIf="learningSections$ | async as sections">
-      <article class="learning-card" *ngFor="let section of sections; let i = index">
-        <span class="chip">Module {{ i + 1 }}</span>
-        <h2>{{ section.section }}</h2>
-        <p>{{ section.content }}</p>
-      </article>
+    <section class="card-grid" *ngIf="learningSectionGroups$ | async as groups">
+      <app-learning-card *ngFor="let group of groups" [group]="group"></app-learning-card>
     </section>
   `,
   styles: [
@@ -33,20 +33,19 @@ import { LearningSection } from './learning.model';
         display: grid;
         gap: 1.25rem;
       }
-
       .page-header {
-        padding: 1.4rem;
-        border-radius: 1rem;
-        background: linear-gradient(135deg, rgba(34, 211, 238, 0.14), rgba(167, 139, 250, 0.16));
-        border: 1px solid rgba(148, 163, 184, 0.3);
+        display: grid;
+        gap: 0.8rem;
       }
-
-      .page-header p {
-        margin-top: 0.8rem;
+      h1 {
+        font-size: clamp(1.8rem, 3.8vw, 2.5rem);
+        margin: 0;
+      }
+      p {
+        margin: 0;
         color: #cbd5e1;
-        line-height: 1.6;
+        line-height: 1.65;
       }
-
       .status {
         padding: 1rem;
         border-radius: 0.75rem;
@@ -54,56 +53,46 @@ import { LearningSection } from './learning.model';
         background: rgba(127, 29, 29, 0.25);
         color: #fecaca;
       }
-
       .card-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 1rem;
-      }
-
-      .learning-card {
-        background: linear-gradient(160deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.9));
-        border: 1px solid rgba(125, 211, 252, 0.2);
-        border-radius: 1rem;
-        padding: 1.15rem;
-        box-shadow: 0 12px 25px rgba(15, 23, 42, 0.35);
-        transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
-      }
-
-      .learning-card:hover {
-        transform: translateY(-4px) scale(1.01);
-        border-color: rgba(94, 234, 212, 0.58);
-        box-shadow: 0 18px 32px rgba(15, 23, 42, 0.45);
-      }
-
-      .chip {
-        display: inline-block;
-        margin-bottom: 0.65rem;
-        background: rgba(56, 189, 248, 0.2);
-        color: #67e8f9;
-        padding: 0.2rem 0.6rem;
-        border-radius: 999px;
-        font-size: 0.75rem;
-      }
-
-      h2 {
-        margin-bottom: 0.65rem;
-        color: #e0f2fe;
-        font-size: 1.1rem;
-      }
-
-      p {
-        color: #cbd5e1;
-        line-height: 1.55;
       }
     `
   ]
 })
 export class FullstackLearningComponent {
-  public readonly learningSections$: Observable<LearningSection[]>;
   public errorMessage = '';
 
-  constructor(private readonly learningService: LearningService) {
-    this.learningSections$ = this.learningService.getFullStackLearning();
+  public readonly learningSectionGroups$: Observable<LearningSectionGroup[]> = this.learningService.getFullStackLearningContent().pipe(
+    map((sections) => this.groupSections(sections)),
+    catchError(() => {
+      this.errorMessage =
+        'Unable to load learning content right now. Verify that the backend is running on http://localhost:3000.';
+      return of([]);
+    })
+  );
+
+  constructor(private readonly learningService: LearningService) {}
+
+  private groupSections(sections: LearningSection[]): LearningSectionGroup[] {
+    const grouped = new Map<string, Partial<Record<LearningLevel, LearningSection>>>();
+
+    sections.forEach((section) => {
+      const levels = grouped.get(section.section) ?? {};
+      levels[section.level] = section;
+      grouped.set(section.section, levels);
+    });
+
+    return [...grouped.entries()]
+      .filter(([, levels]) => levels.beginner && levels.intermediate && levels.advanced)
+      .map(([section, levels]) => ({
+        section,
+        title: levels.beginner?.title ?? section,
+        levels: {
+          beginner: levels.beginner as LearningSection,
+          intermediate: levels.intermediate as LearningSection,
+          advanced: levels.advanced as LearningSection
+        }
+      }));
   }
 }

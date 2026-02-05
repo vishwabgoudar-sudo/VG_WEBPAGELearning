@@ -18,48 +18,43 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     `
       .navbar {
         position: sticky;
-        top: 0;
+        top: 0.75rem;
         z-index: 10;
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 1rem;
-        padding: 1rem 1.25rem;
+        padding: 1rem 1.2rem;
         border-radius: 1rem;
-        background: rgba(15, 23, 42, 0.85);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(148, 163, 184, 0.35);
-        box-shadow: 0 15px 35px rgba(2, 6, 23, 0.4);
+        background: rgba(15, 23, 42, 0.75);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(148, 163, 184, 0.28);
       }
-
       .brand {
         font-weight: 700;
         text-decoration: none;
-        color: #67e8f9;
+        background: linear-gradient(120deg, #67e8f9, #c4b5fd);
+        -webkit-background-clip: text;
+        color: transparent;
       }
-
       nav {
         display: flex;
-        flex-wrap: wrap;
         gap: 0.5rem;
+        flex-wrap: wrap;
       }
-
       nav a {
         text-decoration: none;
-        padding: 0.5rem 0.85rem;
-        border-radius: 0.65rem;
+        padding: 0.5rem 0.9rem;
+        border-radius: 999px;
         color: #e2e8f0;
-        transition: all 180ms ease;
+        transition: all 220ms ease;
       }
-
       nav a:hover {
-        background: rgba(56, 189, 248, 0.2);
-        transform: translateY(-1px);
+        transform: translateY(-1px) scale(1.02);
+        background: rgba(56, 189, 248, 0.15);
       }
-
       nav a.active {
-        background: linear-gradient(120deg, rgba(56, 189, 248, 0.25), rgba(167, 139, 250, 0.3));
-        color: #bae6fd;
+        background: linear-gradient(120deg, rgba(56, 189, 248, 0.28), rgba(167, 139, 250, 0.26));
       }
     `
   ]
